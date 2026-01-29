@@ -6,8 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/kietle/Downloads",
-      "program": "/Users/kietle/Downloads/build/Debug/outDebug"
+      "cwd": "/Users/kietle/Documents/UTH/uth_cnpm",
+      "program": "/Users/kietle/Documents/UTH/uth_cnpm/build/Debug/outDebug"
     }
   ]
 }
