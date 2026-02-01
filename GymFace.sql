@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost
--- Thời gian đã tạo: Th2 01, 2026 lúc 10:38 AM
+-- Thời gian đã tạo: Th2 01, 2026 lúc 03:55 PM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.0.28
 
@@ -29,10 +29,18 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `Cart` (
   `cart_id` int(11) NOT NULL,
-  `member_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
   `service_package_id` int(11) DEFAULT NULL,
   `quantity` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `Cart`
+--
+
+INSERT INTO `Cart` (`cart_id`, `user_id`, `service_package_id`, `quantity`) VALUES
+(2, 1, 1, 1),
+(3, 1, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -100,7 +108,8 @@ CREATE TABLE `Member` (
 
 INSERT INTO `Member` (`member_id`, `email`, `password`, `name`, `mobile`, `address`, `DOB`, `gender`, `height`, `weight`, `role`) VALUES
 (1, 'admin@gym.com', '123456', 'Quan Tri Vien', '0912345678', 'Phong Admin', NULL, NULL, NULL, NULL, 'admin'),
-(3, 'leanhkiet2508@gmail.com', '123', 'Lê Anh Kiệt', '0918608977', '1 abc', NULL, NULL, NULL, NULL, 'member');
+(3, 'leanhkiet2508@gmail.com', '123', 'Lê Anh Kiệt', '0918608977', '1 abc', NULL, NULL, NULL, NULL, 'member'),
+(4, 'leanhkiet208@gmail.com', '12', 'Lê ', '0918608976', '1 abcs', NULL, NULL, NULL, NULL, 'member');
 
 -- --------------------------------------------------------
 
@@ -110,7 +119,7 @@ INSERT INTO `Member` (`member_id`, `email`, `password`, `name`, `mobile`, `addre
 
 CREATE TABLE `Order` (
   `order_id` int(11) NOT NULL,
-  `member_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
   `shipping_id` int(11) DEFAULT NULL,
   `ward_id` int(11) DEFAULT NULL,
   `order_date` datetime DEFAULT current_timestamp(),
@@ -123,11 +132,9 @@ CREATE TABLE `Order` (
 -- Đang đổ dữ liệu cho bảng `Order`
 --
 
-INSERT INTO `Order` (`order_id`, `member_id`, `shipping_id`, `ward_id`, `order_date`, `total`, `payment_type`, `status`) VALUES
-(1, 1, 1, 1, '2026-02-01 13:58:07', 10000.00, NULL, 'Cancelled'),
-(2, 1, 1, 1, '2026-02-01 14:37:42', 500000.00, NULL, 'Paid'),
-(3, 1, 1, 1, '2026-02-01 14:38:57', 500000.00, NULL, 'Cancelled'),
-(6, 3, 1, 1, '2026-02-01 16:29:56', 500000.00, NULL, 'Paid');
+INSERT INTO `Order` (`order_id`, `user_id`, `shipping_id`, `ward_id`, `order_date`, `total`, `payment_type`, `status`) VALUES
+(3, 4, 1, 1, '2026-02-01 21:44:14', 3030000.00, NULL, 'New'),
+(4, 4, 1, 1, '2026-02-01 21:50:07', 3030000.00, NULL, 'Cancelled');
 
 -- --------------------------------------------------------
 
@@ -148,10 +155,8 @@ CREATE TABLE `Order_detail` (
 --
 
 INSERT INTO `Order_detail` (`order_detail_id`, `order_id`, `service_package_id`, `quantity`, `price`) VALUES
-(1, 1, 4, 1, 10000.00),
-(2, 2, 1, 1, 500000.00),
-(3, 3, 1, 1, 500000.00),
-(7, 6, 1, 1, 500000.00);
+(3, 3, 2, 1, 3000000.00),
+(4, 4, 2, 1, 3000000.00);
 
 -- --------------------------------------------------------
 
@@ -196,7 +201,7 @@ CREATE TABLE `Service_package` (
 INSERT INTO `Service_package` (`service_package_id`, `category_id`, `code`, `name`, `price`, `status`, `detail`, `duration`) VALUES
 (1, 1, 'SV001', 'Goi 1 Thang', 500000.00, NULL, 'Tap full time', 30),
 (2, 2, 'PT01', 'PT 1 kem 1', 3000000.00, NULL, '10 buoi tap', 10),
-(4, 3, 'TP02', 'Nước Suối', 10000.00, NULL, NULL, NULL);
+(3, 3, 'TP01', 'Nước Suối', 10000.00, 'Active', 'Mô tả mặc định', 30);
 
 -- --------------------------------------------------------
 
@@ -217,6 +222,34 @@ CREATE TABLE `Shipping` (
 INSERT INTO `Shipping` (`shipping_id`, `type`, `cost`) VALUES
 (1, 'Giao nhanh', 30000.00),
 (2, 'Giao tiet kiem', 15000.00);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `User`
+--
+
+CREATE TABLE `User` (
+  `user_id` int(11) NOT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `mobile` varchar(15) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `DOB` date DEFAULT NULL,
+  `gender` varchar(10) DEFAULT NULL,
+  `height` float DEFAULT NULL,
+  `weight` float DEFAULT NULL,
+  `role` varchar(20) DEFAULT 'member'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `User`
+--
+
+INSERT INTO `User` (`user_id`, `email`, `password`, `name`, `mobile`, `address`, `DOB`, `gender`, `height`, `weight`, `role`) VALUES
+(1, 'admin@gym.com', '123456', 'Quan Tri Vien', '0912345678', 'Phong Admin', NULL, NULL, NULL, NULL, 'admin'),
+(4, 'leanhkiet2508@gmail.com', '123', 'Lê Anh Kiệt', '0918608977', '1 abc', NULL, NULL, NULL, NULL, 'member');
 
 -- --------------------------------------------------------
 
@@ -247,7 +280,7 @@ INSERT INTO `Ward` (`ward_id`, `district_id`, `name`) VALUES
 --
 ALTER TABLE `Cart`
   ADD PRIMARY KEY (`cart_id`),
-  ADD KEY `member_id` (`member_id`),
+  ADD KEY `user_id` (`user_id`),
   ADD KEY `service_package_id` (`service_package_id`);
 
 --
@@ -275,7 +308,7 @@ ALTER TABLE `Member`
 --
 ALTER TABLE `Order`
   ADD PRIMARY KEY (`order_id`),
-  ADD KEY `member_id` (`member_id`),
+  ADD KEY `user_id` (`user_id`),
   ADD KEY `shipping_id` (`shipping_id`),
   ADD KEY `ward_id` (`ward_id`);
 
@@ -307,6 +340,13 @@ ALTER TABLE `Shipping`
   ADD PRIMARY KEY (`shipping_id`);
 
 --
+-- Chỉ mục cho bảng `User`
+--
+ALTER TABLE `User`
+  ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
 -- Chỉ mục cho bảng `Ward`
 --
 ALTER TABLE `Ward`
@@ -321,7 +361,7 @@ ALTER TABLE `Ward`
 -- AUTO_INCREMENT cho bảng `Cart`
 --
 ALTER TABLE `Cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT cho bảng `Category`
@@ -339,19 +379,19 @@ ALTER TABLE `District`
 -- AUTO_INCREMENT cho bảng `Member`
 --
 ALTER TABLE `Member`
-  MODIFY `member_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `member_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `Order`
 --
 ALTER TABLE `Order`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `Order_detail`
 --
 ALTER TABLE `Order_detail`
-  MODIFY `order_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `order_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `Province`
@@ -363,13 +403,19 @@ ALTER TABLE `Province`
 -- AUTO_INCREMENT cho bảng `Service_package`
 --
 ALTER TABLE `Service_package`
-  MODIFY `service_package_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `service_package_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `Shipping`
 --
 ALTER TABLE `Shipping`
   MODIFY `shipping_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT cho bảng `User`
+--
+ALTER TABLE `User`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `Ward`
@@ -385,7 +431,7 @@ ALTER TABLE `Ward`
 -- Các ràng buộc cho bảng `Cart`
 --
 ALTER TABLE `Cart`
-  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `Member` (`member_id`),
+  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `User` (`user_id`),
   ADD CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`service_package_id`) REFERENCES `Service_package` (`service_package_id`);
 
 --
@@ -398,7 +444,7 @@ ALTER TABLE `District`
 -- Các ràng buộc cho bảng `Order`
 --
 ALTER TABLE `Order`
-  ADD CONSTRAINT `order_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `Member` (`member_id`),
+  ADD CONSTRAINT `order_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `User` (`user_id`),
   ADD CONSTRAINT `order_ibfk_2` FOREIGN KEY (`shipping_id`) REFERENCES `Shipping` (`shipping_id`),
   ADD CONSTRAINT `order_ibfk_3` FOREIGN KEY (`ward_id`) REFERENCES `Ward` (`ward_id`);
 

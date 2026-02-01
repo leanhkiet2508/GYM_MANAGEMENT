@@ -1,0 +1,112 @@
+/* style.css - Giao diện GymFace */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Thanh menu đen trên cùng */
+nav {
+    background-color: #333;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-right: 20px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+nav a:hover { color: #f39c12; }
+
+/* Khung chứa nội dung chính */
+.container {
+    width: 80%;
+    margin: 20px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Form đăng ký / Đăng nhập */
+form input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; /* Giúp ô không bị phình to */
+}
+
+button {
+    background-color: #f39c12; /* Màu cam */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+button:hover { background-color: #e67e22; }
+
+/* --- 1. LOGO NỔI BẬT --- */
+.logo {
+    font-size: 28px;        /* Chữ to đùng */
+    font-weight: 900;       /* Chữ siêu đậm */
+    color: #f39c12 !important; /* Màu cam chủ đạo */
+    text-transform: uppercase; /* Viết hoa toàn bộ */
+    letter-spacing: 2px;    /* Giãn cách chữ cho sang */
+    text-shadow: 2px 2px 0px #000; /* Bóng đổ nhẹ */
+    font-family: 'Arial Black', sans-serif;
+    text-decoration: none;
+}
+
+/* --- 2. NÚT XÓA TRONG GIỎ HÀNG --- */
+.btn-delete {
+    background-color: #e74c3c; /* Màu đỏ */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    width: auto; /* Để nút tự co giãn */
+}
+.btn-delete:hover {
+    background-color: #c0392b;
+}
+
+/* Danh sách sản phẩm (Trang chủ) */
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.product-item {
+    border: 1px solid #eee;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    background: #fff;
+    transition: transform 0.2s;
+}
+
+.product-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.product-item h3 { color: #333; margin: 10px 0; }
+.price { color: #d35400; font-size: 18px; font-weight: bold; }
