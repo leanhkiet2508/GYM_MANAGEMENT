@@ -6,9 +6,9 @@ body {
     padding: 0;
 }
 
-/* Thanh menu đen trên cùng */
+
 nav {
-    background-color: #333;
+    background-color: #222;
     padding: 15px 20px;
     display: flex;
     justify-content: space-between;
@@ -23,7 +23,7 @@ nav a {
     font-size: 16px;
 }
 
-nav a:hover { color: #f39c12; }
+nav a:hover { color: #e012f3; }
 
 /* Khung chứa nội dung chính */
 .container {
@@ -42,11 +42,11 @@ form input {
     margin: 10px 0;
     border: 1px solid #ddd;
     border-radius: 4px;
-    box-sizing: border-box; /* Giúp ô không bị phình to */
+    box-sizing: border-box;
 }
 
 button {
-    background-color: #f39c12; /* Màu cam */
+    background-color: #bf12f3; 
     color: white;
     padding: 12px 20px;
     border: none;
@@ -57,33 +57,33 @@ button {
     font-weight: bold;
 }
 
-button:hover { background-color: #e67e22; }
+button:hover { background-color: #b047cf; }
 
 /* --- 1. LOGO NỔI BẬT --- */
 .logo {
-    font-size: 28px;        /* Chữ to đùng */
-    font-weight: 900;       /* Chữ siêu đậm */
-    color: #f39c12 !important; /* Màu cam chủ đạo */
-    text-transform: uppercase; /* Viết hoa toàn bộ */
-    letter-spacing: 2px;    /* Giãn cách chữ cho sang */
-    text-shadow: 2px 2px 0px #000; /* Bóng đổ nhẹ */
+    font-size: 28px;
+    font-weight: 900;
+    color: #bf12f3 !important;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 0px #000;
     font-family: 'Arial Black', sans-serif;
     text-decoration: none;
 }
 
 /* --- 2. NÚT XÓA TRONG GIỎ HÀNG --- */
 .btn-delete {
-    background-color: #e74c3c; /* Màu đỏ */
+    background-color: #e74c3c;
     color: white;
     border: none;
     padding: 5px 10px;
     border-radius: 4px;
     cursor: pointer;
     font-size: 12px;
-    width: auto; /* Để nút tự co giãn */
+    width: auto;
 }
 .btn-delete:hover {
-    background-color: #c0392b;
+    background-color: #a52bc0;
 }
 
 /* Danh sách sản phẩm (Trang chủ) */
@@ -109,4 +109,4 @@ button:hover { background-color: #e67e22; }
 }
 
 .product-item h3 { color: #333; margin: 10px 0; }
-.price { color: #d35400; font-size: 18px; font-weight: bold; }
+.price { color: #8600d3; font-size: 18px; font-weight: bold; }
